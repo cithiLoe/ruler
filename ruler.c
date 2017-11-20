@@ -388,7 +388,7 @@ window_type_to_string(xcb_ewmh_get_atoms_reply_t *reply)
 				if (i == 0)
 					sprintf(str, "%s", atom_name);
 				else
-					sprintf(str, "%s,%s", str, atom_name);
+					sprintf(&str[strlen(str)], ",%s", atom_name);
 			}
 
 			free(atom_name);
