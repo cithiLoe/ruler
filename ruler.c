@@ -895,13 +895,13 @@ reload_config(void)
 
 	cleanup();
 	if (xdg_home == NULL)
-		asprintf(&xdg_home, "%s/.config", getenv("HOME"));
+		asprintf(&xdg_cfg_path, "%s/.config/ruler/rulerrc", getenv("HOME"));
+	else
+		asprintf(&xdg_cfg_path, "%s/ruler/rulerrc", xdg_home); 
 
-	asprintf(&xdg_cfg_path, "%s/ruler/rulerrc", xdg_home);
 	if (parse_file(xdg_cfg_path) == 1 && no_of_configs == 0)
 		errx(1, "couldn't open config file '%s' (%s). No other config files supplied, exiting", xdg_cfg_path, strerror(errno));
 	free(xdg_cfg_path);
-	free(xdg_home);
 
 	for (i = 0; i < no_of_configs; i++) {
 		if (parse_file(configs[i]) != 0)
