@@ -785,6 +785,7 @@ handle_events(void)
 		}
 
 		if (state_reload) {
+			signal(SIGUSR1, handle_sig);
 			reload_config();
 			state_reload = 0;
 		}
